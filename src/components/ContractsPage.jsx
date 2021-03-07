@@ -34,23 +34,30 @@ const ContractsPage = (props) => {
     const [specialisation, setSpecialisation] = useState()
     const [date, setDate] = useState()
     const [budget, setBudget] = useState()
-    const [contracts, setContracts] = useState()
-    contracts = [
-        {companyName: "ABC Company", specialisation: "Elevators", date: "11/01/20 - 12/01/20", budget: 10000}
-    ]
+    const [contracts, setContracts] = useState([])
+    
+    const onDelete = (contractToDelete) => {
+      setContracts(contracts.filter(contract => 
+        contract.key != contractToDelete
+      ))
+    }
     
     const submit = e => {
         const _id = uuidv4();
 
-        const contract = {
-            _id,
-            companyName,
-            specialisation,
-            date,
-            budget,
-        }
+        const contract = (
+          <Contract
+          key = {_id}
+          id = {_id}
+          companyName = {companyName}
+          specialisation = {specialisation}
+          date = {date}
+          budget = {budget}
+          onDelete = {onDelete}/>
+        )
 
-        setContracts(contract)
+        setContracts([...contracts, contract])
+        onClose()
 
     }
 
@@ -69,16 +76,7 @@ const ContractsPage = (props) => {
             </Tr>
           </Thead>
           <Tbody>
-              {contracts.map((element, id) => {
-                  return (
-                      <Tr>
-                          <Td>{element.companyName}</Td>
-                          <Td>{element.specialisation}</Td>
-                          <Td>{element.date}</Td>
-                          <Td>{element.budget}</Td>
-                      </Tr>
-                  )
-              })}
+              {contracts}
           </Tbody>
           <Tfoot>
           </Tfoot>
@@ -126,3 +124,18 @@ const ContractsPage = (props) => {
 }
 
 export default ContractsPage
+
+const Contract = (props) => {
+  const { id, companyName, specialisation, date, budget, onDelete } = props
+
+  return (
+    <Tr key = {id}>
+      <Td>{companyName}</Td>
+      <Td>{specialisation}</Td>
+      <Td>{date}</Td>
+      <Td>{budget}</Td>
+      <Button onClick = {onDelete}>X</Button>
+    </Tr>
+  )
+}
+

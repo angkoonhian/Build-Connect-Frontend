@@ -16,9 +16,9 @@ import {
     MenuDivider,
     Heading,
     Input,
-    Button
+    Button,
+    Stack
   } from "@chakra-ui/react"
-import LoginPage from "./LoginPage";
 
 const LandingPage = (props) => {
 
@@ -32,6 +32,10 @@ const handleAddContract = () => {
   setScreen("ContractsPage")
 }
 
+const handleSearchContract = () => {
+  setScreen("SearchContractsPage")
+}
+
 const { Title } = Typography;
 
     return (
@@ -42,14 +46,13 @@ const { Title } = Typography;
               <h4>username</h4>
               <Menu>
                 <MenuButton as={Button}>
-                    X
+                    LIST
                 </MenuButton>
                 <MenuList>
                   <MenuItem onClick = {handleLogOut}>Logout</MenuItem>
-                  <MenuItem>Create a Copy</MenuItem>
-                  <MenuItem>Mark as Draft</MenuItem>
-                  <MenuItem>Delete</MenuItem>
-                  <MenuItem>Attend a Workshop</MenuItem>
+                  <MenuItem>AAAAA</MenuItem>
+                  <MenuItem>BBBBBB</MenuItem>
+                  <MenuItem>CCCCCC</MenuItem>
                  </MenuList>
               </Menu>
             </div>
@@ -64,8 +67,10 @@ const { Title } = Typography;
               <SearchOutlined/>
             </Button>
             </div>
-            <Button onClick = {handleAddContract}>Add Contract</Button>
-            <Button>Search Contracts</Button>
+            <div className = "quick-features">
+              <Button onClick = {handleAddContract}>Add Contract</Button>
+              <Button onClick = {handleSearchContract}>Search Contracts</Button>
+            </div>
         </div>
     )
 
